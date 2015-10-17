@@ -33,6 +33,7 @@ dependencies {
     // compat
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:mediarouter-v7:23.0.1'
     compile 'com.android.support:cardview-v7:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
     compile 'com.android.support:support-annotations:23.0.1'
@@ -45,9 +46,10 @@ dependencies {
     compile 'com.squareup.retrofit:converter-simplexml:1.9.0'
     compile 'org.simpleframework:simple-xml:2.7.1'
 
-    // analytics
-    compile 'com.google.android.gms:play-services-base:7.5.0'
-    compile 'com.google.android.gms:play-services-analytics:7.5.0'
+    // google play services
+    compile 'com.google.android.gms:play-services-base:8.1.0'
+    compile 'com.google.android.gms:play-services-analytics:8.1.0'
+    compile 'com.google.android.gms:play-services-cast:8.1.0'
 
     // ui
     compile 'com.afollestad:material-dialogs:0.7.7.0'

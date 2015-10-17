@@ -29,4 +29,6 @@
     <string name="share">Share</string>
     <string name="share_article">Share article</string>
     <string name="feed_selection">Set topic</string>
+    <string name="receiver_app_id">03C81150</string>
+    <string name="media_route_menu_title">Cast to device</string>
 </resources>

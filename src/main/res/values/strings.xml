@@ -29,4 +29,6 @@
     <string name="share">Teilen</string>
     <string name="share_article">Artikel teilen</string>
     <string name="feed_selection">Wähle Thema</string>
+    <string name="receiver_app_id">03C81150</string>
+    <string name="media_route_menu_title">Auf Gerät streamen</string>
 </resources>

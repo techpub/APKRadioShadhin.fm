@@ -3,8 +3,10 @@ package de.domradio.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.MediaRouteActionProvider;
+import android.support.v7.media.MediaRouteSelector;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -13,6 +15,7 @@ import com.greenfrvr.rubberloader.RubberLoaderView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.domradio.DomradioApplication;
 import de.domradio.R;
 import de.domradio.activity.adapter.AppBarViewAdapter;
 import de.domradio.activity.adapter.PlayerViewAdapter;
@@ -53,8 +56,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_acticity_menu, menu);
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_acticity_menu, menu);
+        MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item);
+        MediaRouteActionProvider mediaRouteActionProvider =
+                (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
+        MediaRouteSelector mediaRouteSelector = ((DomradioApplication) getApplication()).getMediaRouteSelector();
+        mediaRouteActionProvider.setRouteSelector(mediaRouteSelector);
         return true;
     }
 
@@ -71,6 +79,17 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ((DomradioApplication) getApplication()).startDiscovery();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ((DomradioApplication) getApplication()).stopDiscovery();
+    }
 
     @Override
     protected void onDestroy() {
@@ -96,12 +115,16 @@ public class MainActivity extends BaseActivity {
 
     @EventBusCallback
     public void onEvent(StartLoadingFeedEvent event) {
-        loaderView.setVisibility(View.VISIBLE);
-        loaderView.startLoading();
+        if (loaderView != null) {
+            loaderView.setVisibility(View.VISIBLE);
+            loaderView.startLoading();
+        }
     }
 
     @EventBusCallback
     public void onEvent(StopLoadingFeedEvent event) {
-        loaderView.setVisibility(View.GONE);
+        if (loaderView != null) {
+            loaderView.setVisibility(View.GONE);
+        }
     }
 }
